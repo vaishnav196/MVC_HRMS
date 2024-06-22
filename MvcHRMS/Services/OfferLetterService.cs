@@ -81,8 +81,8 @@ namespace MvcHRMS.Services
         private void SendEmailWithAttachment(string toEmail, string content, string fileName, string filePath)
         {
             // Email sender credentials
-            string fromEmail = "vaish00721@gmail.com"; // Replace with your email
-            string fromPassword = "kzuvycbbvbrdempp"; // Replace with your email password
+            string fromEmail = "your@mail"; // Replace with your email
+            string fromPassword = "yourpassword"; // Replace with your email password
 
             // Create mail message
             using (var message = new MailMessage())
