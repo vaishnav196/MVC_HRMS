@@ -1,0 +1,91 @@
+﻿@model MvcHRMS.Models.Emp
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container">
+    <div class="row ">
+        <div class="col-md-6">
+            <img src="~/Images/RegisterMvc.png" height="600" />
+        </div>
+        <div class="col-md-6">
+            <h2 class="">Register</h2>
+            <form asp-action="Register" method="post" class="needs-validation" novalidate>
+                <div class="row g-3">
+                    <div class="">
+                        <label for="inputName" class="form-label">Name</label>
+                        <input asp-for="Name" class="form-control" id="inputName" required placeholder="Enter Name"> 
+                        <div class="invalid-feedback">
+                            Please enter your name.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputContact" class="form-label">Contact Number</label>
+                        <input asp-for="Contact" class="form-control" id="inputContact" required placeholder="Enter Contact Number">
+                        <div class="invalid-feedback">
+                            Please enter a valid contact number.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">Email address</label>
+                    <input asp-for="Email" class="form-control" id="inputEmail" required placeholder="Enter Email Address">
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input asp-for="Password" type="password" class="form-control" id="inputPassword" required placeholder="Enter Password">
+                    <div class="invalid-feedback">
+                        Please enter your password.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="inputDesignation" class="form-label">Designation</label>
+                    <input asp-for="Designation" class="form-control" id="inputDesignation" required placeholder="Eg: Developer">
+                    <div class="invalid-feedback">
+                        Please enter your designation.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="inputDateOfJoining" class="form-label">Date of Joining</label>
+                    <input asp-for="DateOfJoining" type="date" class="form-control" id="inputDateOfJoining" required placeholder="Date of Joining">
+                    <div class="invalid-feedback">
+                        Please enter your date of joining.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-primary w-50  ">Register</button>
+                <br />
+                <a asp-action="Login" asp-controller="Emp" class="nav-link text-primary   d-block">If Already Registered? Login</a>
+            </form>
+        </div>
+        
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Bootstrap form validation
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+}

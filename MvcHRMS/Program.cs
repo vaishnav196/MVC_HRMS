@@ -15,8 +15,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 ));
 //builder.Services.AddScoped<EmpRepo, EmpService>();
 
+builder.Services.AddSession();
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddScoped<IOfferLetterRepository, OfferLetterRepository>();
 builder.Services.AddScoped<OfferLetterService>();
+
+
+builder.Services.AddScoped<IEmpRepository, EmpRepository>();
+builder.Services.AddScoped<IEmpService, EmpService>();
 
 var app = builder.Build();
 
@@ -32,11 +40,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=GenerateOffer}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

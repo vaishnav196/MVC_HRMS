@@ -2,7 +2,7 @@
 
 namespace MvcHRMS.Controllers
 {
-    public class AccountController : Controller
+    public class HRController : Controller
     {
         public IActionResult Index()
         {

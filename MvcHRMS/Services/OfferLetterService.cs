@@ -50,7 +50,7 @@ namespace MvcHRMS.Services
 
         private string GenerateOfferLetterContent(string name, string dateOfJoining, string salary)
         {
-            return $" Offer Letter\nDear {name},\n\nWe are pleased to offer you the position. Your date of joining will be {dateOfJoining} and your salary will be {salary}.\n We are thrilled to extend to you an offer for the Software Developer position at MASSTECH. After careful consideration of your qualifications, experience, and interview performance, we are confident that you will make a valuable addition to our team.\nYour enthusiasm for [Software Industry and your impressive achievements, particularly accomplishments and skills, stood out during the selection process. We believe your expertise will contribute significantly to our ongoing success.\nSincerely,\nMasstech";
+            return $" Offer Letter\nDear {name},\n\nWe are pleased to offer you the position. Your date of joining will be {dateOfJoining} and your salary will be {salary}.\n We are thrilled to extend to you an offer for the Software Developer position at MASSTECH. After careful consideration of your qualifications, experience, and interview performance, we are confident that you will make a valuable addition to our team.\nYour enthusiasm for Software Industry and your impressive achievements, particularly accomplishments and skills, stood out during the selection process. We believe your expertise will contribute significantly to our ongoing success.\nSincerely,\nMasstech";
         }
         private string SavePdfToFileSystem(string content, string fileName)
         {

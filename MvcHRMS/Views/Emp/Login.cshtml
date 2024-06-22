@@ -1,0 +1,66 @@
+﻿@model MvcHRMS.Models.Emp
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container">
+    <div class="row  mt-5">
+        <div class="col-md-6">
+            <h2 class="mb-4">Login</h2>
+            <form asp-action="Login" method="post" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">Email address</label>
+                    <input asp-for="Email" class="form-control w-50" id="inputEmail" required placeholder="Enter Email">
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input asp-for="Password" type="password" class="form-control w-50" id="inputPassword" required placeholder="Enter Password">
+                    <div class="invalid-feedback">
+                        Please enter your password.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success w-50 d-block ">Login</button>
+     
+                <a asp-action="Register" asp-controller="Emp" class="nav-link text-primary ms-5 px-3"> New User? Register Here</a>
+            </form>
+            @if (!string.IsNullOrEmpty(ViewBag.Error))
+            {
+                <div class="alert alert-danger mt-3" role="alert">
+                    @ViewBag.Error
+                </div>
+            }
+        </div>
+        <div class="col-md-6">
+            <img  src="~/Images/mvcLogin.png" height="500"/>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Bootstrap form validation
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+}

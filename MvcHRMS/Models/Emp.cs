@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MvcHRMS.Models
 {
-    public class Employee
+    public class Emp
     {
         [Key]
         public int EmpID { get; set; }
@@ -16,7 +16,7 @@ namespace MvcHRMS.Models
         [MaxLength(50)]
         public string Contact { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Enter Email Id")]
         [MaxLength(100)]
         public string Email { get; set; }
 
@@ -24,9 +24,9 @@ namespace MvcHRMS.Models
         [MaxLength(100)]
         public string Password { get; set; }
 
-      
+
         [MaxLength(100)]
-        public string Role { get; set; }
+        public string Role { get; set; } = "Employee";
 
         [Required(ErrorMessage = "Enter Date of Joining")]
         public DateTime DateOfJoining { get; set; }

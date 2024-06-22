@@ -12,5 +12,6 @@ namespace MvcHRMS.Data
         }
 
         public DbSet<OfferLetter> OfferLetters { get; set; }
+        public DbSet<Emp> Emps { get; set; }
     }
 }
