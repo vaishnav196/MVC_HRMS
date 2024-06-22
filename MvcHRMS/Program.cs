@@ -26,6 +26,7 @@ builder.Services.AddScoped<OfferLetterService>();
 builder.Services.AddScoped<IEmpRepository, EmpRepository>();
 builder.Services.AddScoped<IEmpService, EmpService>();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -80,25 +80,7 @@ namespace MvcHRMS.Controllers
         }
 
 
-        //[HttpGet]
-        //public IActionResult UserHome()
-        //{
-        //    if (HttpContext.Session.GetString("Role") == "Employee")
-        //    {
-        //        return View();
-        //    }
-        //    return RedirectToAction("Login");
-        //}
-
-        //[HttpGet]
-        //public IActionResult HRHome()
-        //{
-        //    if (HttpContext.Session.GetString("Role") == "HRadmin")
-        //    {
-        //        return View();
-        //    }
-        //    return RedirectToAction("Login");
-        //}
+        
 
         [HttpGet]
         public IActionResult Logout()

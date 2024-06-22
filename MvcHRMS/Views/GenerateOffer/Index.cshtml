@@ -3,16 +3,23 @@
 @{
     ViewData["Title"] = "Generate Offer Letter";
 }
-
+@if (TempData["msg"] != null)
+{
+    @TempData["msg"]
+}
+<partial name="Notification" />
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <h2 class="text-center">Generate Offer Letter</h2>
-            <form asp-action="GenerateOffer" method="post">
+            <form asp-action="GenerateOffer" method="post" id="offerLetterForm">
                 <div class="form-group">
                     <label for="EmpId">Employee ID</label>
                     <input asp-for="EmpId" class="form-control" id="EmpId" placeholder="Enter Employee ID" />
                     <span asp-validation-for="EmpId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-secondary" id="fetchDetails" asp-action="FetchEmployeeDetails" asp-controller="GenerateOffer">Fetch Details</button>
                 </div>
                 <div class="form-group">
                     <label for="Name">Name</label>
@@ -34,7 +41,7 @@
                     <input asp-for="Salary" class="form-control" id="Salary" placeholder="Enter Salary" />
                     <span asp-validation-for="Salary" class="text-danger"></span>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3 ">Generate Offer Letter</button>
+                <button type="submit" class="btn btn-primary mt-3">Generate Offer Letter</button>
             </form>
         </div>
     </div>
@@ -42,4 +49,38 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('#fetchDetails').click(function () {
+                var empId = $('#EmpId').val();
+                if (empId) {
+                    $.ajax({
+                        url: '@Url.Action("FetchEmployeeDetails", "GenerateOffer")',
+                        type: 'GET',
+                        data: { empId: empId },
+                        success: function (response) {
+                            if (response && response.empID) {
+                                $('#Name').val(response.name);
+                                $('#Email').val(response.email);
+                                $('#DateOfJoining').val(response.dateOfJoining.split('T')[0]); // Format the date correctly
+                                $('#Salary').val(response.salary);
+                                TempData["Success"] = "Offer Letter Generated";
+                            } else {
+                                TempData["Error"] = "Employee Not Found.";
+                               // alert('Employee not found.');
+
+                            }
+                        },
+                        error: function () {
+                            TempData["Error"] = "An error occurred while fetching details.";
+                            //alert('An error occurred while fetching details.');
+                        }
+                    });
+                } else {
+                   // alert('Please enter an Employee ID.');
+                    TempData["Error"] = "Please enter an Employee ID";
+                }
+            });
+        });
+    </script>
 }

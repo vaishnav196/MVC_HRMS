@@ -1,4 +1,5 @@
-﻿using MvcHRMS.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using MvcHRMS.Data;
 using MvcHRMS.Models;
 using System;
 
@@ -34,6 +35,11 @@ namespace MvcHRMS.Repository
             db.Emps.Add(emp);
             db.SaveChanges();
             return emp;
+        }
+
+        public Emp GetById(int id)
+        {
+            return db.Emps.Find(id);
         }
     }
 }

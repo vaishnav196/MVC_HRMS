@@ -6,11 +6,6 @@ using iText.Kernel.Pdf;
 using iText.Layout.Element;
 using iText.Layout;
 
-
-
-
-
-
 namespace MvcHRMS.Services
 {
     public class OfferLetterService
@@ -43,7 +38,7 @@ namespace MvcHRMS.Services
 
             // Send email with attachment
             SendEmailWithAttachment(email, offerLetterContent, fileName, filePath);
-
+           
             // Clear form fields
             ClearFormFields();
         }
@@ -81,8 +76,8 @@ namespace MvcHRMS.Services
         private void SendEmailWithAttachment(string toEmail, string content, string fileName, string filePath)
         {
             // Email sender credentials
-            string fromEmail = "your@mail"; // Replace with your email
-            string fromPassword = "yourpassword"; // Replace with your email password
+            string fromEmail = "vaish00721@gmail.com"; // Replace with your email
+            string fromPassword = "kzuvycbbvbrdempp"; // Replace with your email password
 
             // Create mail message
             using (var message = new MailMessage())
@@ -107,6 +102,7 @@ namespace MvcHRMS.Services
                     // Send email
                     smtpClient.Send(message);
                 }
+                
             }
         }
 
