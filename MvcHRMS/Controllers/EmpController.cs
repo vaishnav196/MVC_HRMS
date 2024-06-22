@@ -38,14 +38,21 @@ namespace MvcHRMS.Controllers
                 // Implement session or token-based authentication as per your preference
                 if (emp.Role == "Employee")
                 {
-                    return RedirectToAction("Index","EmpHome");
+                    TempData["Login"] = " Employee Login Successfully";
+                    return RedirectToAction("Index","Emp");
                 }
                 else if (emp.Role == "admin")
                 {
-                    return RedirectToAction("Index","HRHome");
+                    TempData["Login"] = " HR Login Successfully";
+                    return RedirectToAction("Index","HR");
                 }
             }
-            ViewBag.Error = "Invalid email or password. Please try again.";
+            else
+            {
+                TempData["Error"] = "Invalid email or password. Please try again.";
+                return View();
+            }
+
             return View();
         }
 
@@ -61,6 +68,7 @@ namespace MvcHRMS.Controllers
             if (ModelState.IsValid)
             {
                 var registeredEmp = _empService.RegisterEmp(emp);
+                TempData["register"] = "Employee Registered Successfully";
                 if (registeredEmp != null)
                 {
                     // Redirect to login page or home page
@@ -72,25 +80,25 @@ namespace MvcHRMS.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult UserHome()
-        {
-            if (HttpContext.Session.GetString("Role") == "Employee")
-            {
-                return View();
-            }
-            return RedirectToAction("Login");
-        }
+        //[HttpGet]
+        //public IActionResult UserHome()
+        //{
+        //    if (HttpContext.Session.GetString("Role") == "Employee")
+        //    {
+        //        return View();
+        //    }
+        //    return RedirectToAction("Login");
+        //}
 
-        [HttpGet]
-        public IActionResult HRHome()
-        {
-            if (HttpContext.Session.GetString("Role") == "HRadmin")
-            {
-                return View();
-            }
-            return RedirectToAction("Login");
-        }
+        //[HttpGet]
+        //public IActionResult HRHome()
+        //{
+        //    if (HttpContext.Session.GetString("Role") == "HRadmin")
+        //    {
+        //        return View();
+        //    }
+        //    return RedirectToAction("Login");
+        //}
 
         [HttpGet]
         public IActionResult Logout()

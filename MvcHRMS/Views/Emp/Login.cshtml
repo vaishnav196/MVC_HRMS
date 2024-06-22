@@ -4,6 +4,11 @@
     ViewData["Title"] = "Login";
 }
 
+@if (TempData["msg"] != null)
+{
+    @TempData["msg"]
+}
+<partial name="Notification" />
 <div class="container">
     <div class="row  mt-5">
         <div class="col-md-6">

@@ -10,55 +10,59 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MvcHRMS.styles.css" asp-append-version="true" />
+   @*  this is for toastr Notifications *@
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HRMS</a>
+                <h1 class="navbar-brand fw-bolder text-danger" asp-area="" asp-controller="" asp-action="">HRMS</h1>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
+                       @*  <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li> *@
+                       @*  <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        </li> *@
                     </ul>
                     <ul class="navbar-nav">
                         @if (HttpContextAccessor.HttpContext.Session.GetString("Role") != null)
                         {
-                            <li class="nav-item">
-                                <span class="nav-link">Hello, @HttpContextAccessor.HttpContext.Session.GetString("Name") (@HttpContextAccessor.HttpContext.Session.GetString("Email"))</span>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Emp" asp-action="Logout">Logout</a>
-                            </li>
+                           
 
                             @if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "Employee")
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="EmpHome" asp-action="Index">Employee Dashboard</a>
-                                </li>
+                                @* <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Emp" asp-action="Index">Employee Dashboard</a>
+                                </li> *@
                             }
                             else if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "admin")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="HRHome" asp-action="Index">HR Dashboard</a>
+                                    <a class="nav-link " asp-controller="GenerateOffer" asp-action="Index">Generate Offer</a>
                                 </li>
                             }
+
+                            <li class="nav-item">
+                                <span class="nav-link fw-bold font-monospace">Hello, @HttpContextAccessor.HttpContext.Session.GetString("Name") </span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-danger btn-sm px-3 py-1 text-white mt-2" asp-controller="Emp" asp-action="Logout">Logout</a>
+                            </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Emp" asp-action="Login">Login</a>
+                                <a class="nav-link fw-bold  text-white btn btn-sm btn-primary px-3 mx-4" asp-controller="Emp" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Emp" asp-action="Register">Register</a>
+                                <a class="nav-link fw-bold text-white btn btn-sm btn-success " asp-controller="Emp" asp-action="Register">Register</a>
                             </li>
                         }
                     </ul>
@@ -74,7 +78,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - MvcHRMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copyRight@2024 - HRMS Made by Vaishnav - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -4,6 +4,11 @@
     ViewData["Title"] = "Register";
 }
 
+@if (TempData["msg"] != null)
+{
+    @TempData["msg"]
+}
+<partial name="Notification" />
 <div class="container">
     <div class="row ">
         <div class="col-md-6">
