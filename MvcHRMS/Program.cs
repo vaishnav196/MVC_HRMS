@@ -25,6 +25,11 @@ builder.Services.AddScoped<OfferLetterService>();
 
 builder.Services.AddScoped<IEmpRepository, EmpRepository>();
 builder.Services.AddScoped<IEmpService, EmpService>();
+builder.Services.AddScoped<IPaySlipService, PaySlipService>();
+
+builder.Services.AddScoped<ILeaveRepository, LeaveRepository>();
+
+builder.Services.AddScoped<ILeaveService, LeaveService>();
 
 
 var app = builder.Build();

@@ -13,5 +13,9 @@ namespace MvcHRMS.Data
 
         public DbSet<OfferLetter> OfferLetters { get; set; }
         public DbSet<Emp> Emps { get; set; }
+
+        public DbSet<PaySlip> PaySlips { get; set; }
+
+        public DbSet<LeaveRequest> LeaveRequests { get; set; }
     }
 }

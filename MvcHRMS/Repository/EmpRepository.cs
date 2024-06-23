@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using iText.Commons.Actions.Contexts;
+using Microsoft.EntityFrameworkCore;
 using MvcHRMS.Data;
 using MvcHRMS.Models;
 using System;
@@ -40,6 +41,18 @@ namespace MvcHRMS.Repository
         public Emp GetById(int id)
         {
             return db.Emps.Find(id);
+        }
+
+
+        public Emp GetEmployeeById(int empId)
+        {
+            return db.Emps.FirstOrDefault(e => e.EmpID == empId);
+        }
+
+        public void SavePaySlip(PaySlip paySlip)
+        {
+            db.PaySlips.Add(paySlip);
+            db.SaveChanges();
         }
     }
 }

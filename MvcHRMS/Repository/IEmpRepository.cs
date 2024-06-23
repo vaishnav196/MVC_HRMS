@@ -7,5 +7,8 @@ namespace MvcHRMS.Repository
         Emp GetById(int id);
         Emp GetEmpByEmailAndPassword(string email, string password);
         Emp CreateEmp(Emp emp);
+
+        Emp GetEmployeeById(int empId);
+        void SavePaySlip(PaySlip paySlip);
     }
 }
