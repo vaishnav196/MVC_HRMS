@@ -19,12 +19,7 @@ namespace MvcHRMS.Controllers
             return View();
         }
 
-        //public IActionResult ViewPayslips()
-        //{
-        //    var payslips = _context.PaySlips.Include (p => p.Employee).ToList();
-        //    return View(payslips);
-        //}
-
+      
         public IActionResult ViewPayslips()
         {
             var userEmail = HttpContext.Session.GetString("Email"); // Fetch the logged-in user's email from session
@@ -71,6 +66,25 @@ namespace MvcHRMS.Controllers
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", payslip.FilePath);
             var fileBytes = System.IO.File.ReadAllBytes(filePath);
             return File(fileBytes, "application/octet-stream", Path.GetFileName(filePath));
+        }
+
+
+        public IActionResult ViewPayPdf(int id)
+        {
+            var PaySlip = _context.PaySlips.FirstOrDefault(p => p.Id == id);
+            if (PaySlip == null)
+            {
+                return NotFound();
+            }
+
+            var filePath = Path.Combine(PaySlip.FilePath);
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            var fileName = Path.GetFileName(filePath);
+            var contentType = "application/pdf"; // Assuming the files are PDFs
+
+            Response.Headers.Add("Content-Disposition", $"inline; filename=\"{fileName}\"");
+
+            return File(fileBytes, contentType);
         }
     }
 }

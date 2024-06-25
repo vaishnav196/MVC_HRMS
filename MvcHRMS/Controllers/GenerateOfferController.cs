@@ -67,6 +67,23 @@ namespace MvcHRMS.Controllers
 
             return View(offerLetters);
         }
+        public IActionResult ViewPdf(int id)
+        {
+            var offerLetter = _context.OfferLetters.FirstOrDefault(p => p.Id == id);
+            if (offerLetter == null)
+            {
+                return NotFound();
+            }
+
+            var filePath = Path.Combine(offerLetter.FilePath);
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            var fileName = Path.GetFileName(filePath);
+            var contentType = "application/pdf"; // Assuming the files are PDFs
+
+            Response.Headers.Add("Content-Disposition", $"inline; filename=\"{fileName}\"");
+
+            return File(fileBytes, contentType);
+        }
 
         public IActionResult Download(int id)
         {

@@ -4,11 +4,14 @@
 @{
 }
 @model IEnumerable<MvcHRMS.Models.PaySlip>
-<div class="container">
+<div class="w-75 mx-auto">
+
+
+<div class="container ">
     <h2 class="text-center">Pay Slips</h2>
-    <table class="table table-striped table-dark">
-        <thead>
-            <tr class="table-dark">
+        <table class="table table-striped table-dark table-light table-bordered table-hover ">
+        <thead class="">
+            <tr class="table-striped">
                 <th>Employee ID</th>
                 <th>Employee Name</th>
                 <th>Month</th>
@@ -23,10 +26,12 @@
                     <td>@payslip.Employee.Name</td>
                     <td>@payslip.Month</td>
                     <td>
-                        <a href="@Url.Action("Download", "PaySlip", new { id = payslip.EmpNo })" class="btn btn-primary">Download</a>
+                        <a href="@Url.Action("Download", "PaySlip", new { id = payslip.EmpNo })" class="btn btn-outline-danger">Download</a>
+                       <a href="@Url.Action("ViewPayPdf", "PaySlip", new { id = payslip.EmpNo })" class="btn btn-outline-primary">View</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+</div>
 </div>

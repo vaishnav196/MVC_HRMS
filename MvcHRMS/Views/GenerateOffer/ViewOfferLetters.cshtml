@@ -4,9 +4,12 @@
 @{
 }
 @model IEnumerable<MvcHRMS.Models.OfferLetter>
+<div class="w-75 mx-auto">
+
+
 <div class="container">
     <h2 class="text-center">Offer Letters</h2>
-    <table class="table table-striped">
+    <table class="table table-striped table-dark">
         <thead>
             <tr>
                 <th>Employee ID</th>
@@ -23,10 +26,12 @@
                     <td>@offerLetter.Name</td>
                   
                     <td>
-                        <a href="@Url.Action("Download", "GenerateOffer", new { id = offerLetter.Id })" class="btn btn-primary">Download</a>
+                        <a href="@Url.Action("Download", "GenerateOffer", new { id = offerLetter.Id })" class="btn btn-outline-danger">Download</a>
+                        <a href="@Url.Action("ViewPdf", "GenerateOffer", new { id = offerLetter.Id })" class="btn btn-outline-primary">View</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+</div>
 </div>
