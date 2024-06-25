@@ -19,13 +19,29 @@ namespace MvcHRMS.Controllers
             return View();
         }
 
+        //public IActionResult ViewPayslips()
+        //{
+        //    var payslips = _context.PaySlips.Include (p => p.Employee).ToList();
+        //    return View(payslips);
+        //}
+
         public IActionResult ViewPayslips()
         {
-            var payslips = _context.PaySlips.Include (p => p.Employee).ToList();
-            return View(payslips);
+            var userEmail = HttpContext.Session.GetString("Email"); // Fetch the logged-in user's email from session
+            var employee = _context.Emps.FirstOrDefault(e => e.Email == userEmail);
+
+            if (employee == null)
+            {
+                return NotFound("Employee not found.");
+            }
+
+            var Payslip = _context.PaySlips
+                .Include(o => o.Employee) // Use the correct navigation property here
+                .Where(o => o.EmpNo == employee.EmpID)
+                .ToList();
+
+            return View(Payslip);
         }
-
-
         [HttpPost]
         public IActionResult GeneratePaySlip(int empId, int workingDays, int leaveDays, string month)
         {

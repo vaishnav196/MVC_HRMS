@@ -23,7 +23,7 @@
                     <td>@payslip.Employee.Name</td>
                     <td>@payslip.Month</td>
                     <td>
-                        <a href="@Url.Action("Download", "PaySlip", new { id = payslip.Id })" class="btn btn-primary">Download</a>
+                        <a href="@Url.Action("Download", "PaySlip", new { id = payslip.EmpNo })" class="btn btn-primary">Download</a>
                     </td>
                 </tr>
             }

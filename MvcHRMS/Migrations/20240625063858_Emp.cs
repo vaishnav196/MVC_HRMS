@@ -6,11 +6,33 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MvcHRMS.Migrations
 {
     /// <inheritdoc />
-    public partial class LeaveRequest : Migration
+    public partial class Emp : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Emps",
+                columns: table => new
+                {
+                    EmpID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Contact = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DateOfJoining = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Salary = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
+                    LeaveBalance = table.Column<int>(type: "int", nullable: false),
+                    LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Designation = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Emps", x => x.EmpID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "LeaveRequests",
                 columns: table => new
@@ -33,6 +55,32 @@ namespace MvcHRMS.Migrations
                     table.ForeignKey(
                         name: "FK_LeaveRequests_Emps_EmpID",
                         column: x => x.EmpID,
+                        principalTable: "Emps",
+                        principalColumn: "EmpID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OfferLetters",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmpId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmpNo = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfJoining = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Salary = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GeneratedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OfferLetters", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OfferLetters_Emps_EmpNo",
+                        column: x => x.EmpNo,
                         principalTable: "Emps",
                         principalColumn: "EmpID",
                         onDelete: ReferentialAction.Cascade);
@@ -65,6 +113,11 @@ namespace MvcHRMS.Migrations
                 column: "EmpID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OfferLetters_EmpNo",
+                table: "OfferLetters",
+                column: "EmpNo");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PaySlips_EmpNo",
                 table: "PaySlips",
                 column: "EmpNo");
@@ -77,7 +130,13 @@ namespace MvcHRMS.Migrations
                 name: "LeaveRequests");
 
             migrationBuilder.DropTable(
+                name: "OfferLetters");
+
+            migrationBuilder.DropTable(
                 name: "PaySlips");
+
+            migrationBuilder.DropTable(
+                name: "Emps");
         }
     }
 }

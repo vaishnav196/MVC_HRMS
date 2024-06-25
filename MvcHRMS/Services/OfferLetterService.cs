@@ -5,34 +5,46 @@ using System.Net;
 using iText.Kernel.Pdf;
 using iText.Layout.Element;
 using iText.Layout;
+using MvcHRMS.Migrations;
+using MvcHRMS.Data;
 
 namespace MvcHRMS.Services
 {
     public class OfferLetterService
     {
         private readonly IOfferLetterRepository _offerLetterRepository;
+        private readonly ApplicationDbContext _context;
 
-        public OfferLetterService(IOfferLetterRepository offerLetterRepository)
+        public OfferLetterService(IOfferLetterRepository offerLetterRepository, ApplicationDbContext _context)
         {
             _offerLetterRepository = offerLetterRepository;
+            this._context = _context;
         }
 
         public void GenerateOfferLetter(string empId, string name, string email, string dateOfJoining, string salary)
-        {
+        {         // Fetch the corresponding Emp record
+            var emp = _context.Emps.FirstOrDefault(e => e.EmpID.ToString() == empId);
+            if (emp == null)
+            {
+                throw new Exception($"Employee with ID {empId} not found.");
+            }
             // Generate offer letter content
             string offerLetterContent = GenerateOfferLetterContent(name, dateOfJoining, salary);
-
+          
             // Save offer letter metadata to database
             string fileName = $"{name}_{DateTime.Now:yyyyMMddHHmmss}";
             string filePath = SavePdfToFileSystem(offerLetterContent, fileName);
             _offerLetterRepository.Insert(new OfferLetter
             {
                 EmpId = empId,
+                EmpNo = emp.EmpID,
+               // EmpId = empId,
                 Name = name,
                 Email = email,
                 Salary="30000",
                 GeneratedDate = DateTime.Now,
                 FilePath = filePath
+                
                 
             });
 

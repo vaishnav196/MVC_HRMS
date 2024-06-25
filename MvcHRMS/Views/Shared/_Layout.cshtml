@@ -44,6 +44,14 @@
                                 <li class="nav-item">
                                     <a class="nav-link" asp-controller="PaySlip" asp-action="ViewPayslips">ViewPayslips</a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="GenerateOffer" asp-action="ViewOfferLetters">ViewOfferLetters</a>
+                                </li>
+
+                              @*   <li class="nav-item">
+                                    <a class="nav-link" asp-controller="PaySlip" asp-action="ViewPayslips">ViewPayslips</a>
+                                </li> *@
                             }
                             else if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "admin")
                             {

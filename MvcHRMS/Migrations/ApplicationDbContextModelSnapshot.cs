@@ -142,6 +142,9 @@ namespace MvcHRMS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EmpNo")
+                        .HasColumnType("int");
+
                     b.Property<string>("FilePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -158,6 +161,8 @@ namespace MvcHRMS.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmpNo");
 
                     b.ToTable("OfferLetters");
                 });
@@ -195,6 +200,17 @@ namespace MvcHRMS.Migrations
                     b.HasOne("MvcHRMS.Models.Emp", "Employee")
                         .WithMany()
                         .HasForeignKey("EmpID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("MvcHRMS.Models.OfferLetter", b =>
+                {
+                    b.HasOne("MvcHRMS.Models.Emp", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmpNo")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MvcHRMS.Models
 {
@@ -9,6 +10,9 @@ namespace MvcHRMS.Models
 
         [Required]
         public string EmpId { get; set; }
+
+        [Required]
+        public int EmpNo { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -24,5 +28,8 @@ namespace MvcHRMS.Models
 
         public DateTime GeneratedDate { get; set; }
         public string FilePath { get; set; }
+
+        [ForeignKey("EmpNo")]
+        public Emp Employee { get; set; }
     }
 }

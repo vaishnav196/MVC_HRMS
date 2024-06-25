@@ -12,7 +12,7 @@ using MvcHRMS.Data;
 namespace MvcHRMS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240622115110_Emp")]
+    [Migration("20240625063858_Emp")]
     partial class Emp
     {
         /// <inheritdoc />
@@ -80,6 +80,52 @@ namespace MvcHRMS.Migrations
                     b.ToTable("Emps");
                 });
 
+            modelBuilder.Entity("MvcHRMS.Models.LeaveRequest", b =>
+                {
+                    b.Property<int>("RequestID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RequestID"));
+
+                    b.Property<int>("AbsentDays")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmpID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TotalDays")
+                        .HasColumnType("int");
+
+                    b.HasKey("RequestID");
+
+                    b.HasIndex("EmpID");
+
+                    b.ToTable("LeaveRequests");
+                });
+
             modelBuilder.Entity("MvcHRMS.Models.OfferLetter", b =>
                 {
                     b.Property<int>("Id")
@@ -99,6 +145,9 @@ namespace MvcHRMS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EmpNo")
+                        .HasColumnType("int");
+
                     b.Property<string>("FilePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -116,7 +165,70 @@ namespace MvcHRMS.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmpNo");
+
                     b.ToTable("OfferLetters");
+                });
+
+            modelBuilder.Entity("MvcHRMS.Models.PaySlip", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EmpNo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Month")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpNo");
+
+                    b.ToTable("PaySlips");
+                });
+
+            modelBuilder.Entity("MvcHRMS.Models.LeaveRequest", b =>
+                {
+                    b.HasOne("MvcHRMS.Models.Emp", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmpID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("MvcHRMS.Models.OfferLetter", b =>
+                {
+                    b.HasOne("MvcHRMS.Models.Emp", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmpNo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("MvcHRMS.Models.PaySlip", b =>
+                {
+                    b.HasOne("MvcHRMS.Models.Emp", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmpNo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 #pragma warning restore 612, 618
         }

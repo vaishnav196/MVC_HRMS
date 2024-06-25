@@ -4,7 +4,7 @@ using System;
 
 namespace MvcHRMS.Repository
 {
-    public class OfferLetterRepository:IOfferLetterRepository
+    public class OfferLetterRepository : IOfferLetterRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
