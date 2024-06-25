@@ -84,7 +84,7 @@ namespace MvcHRMS.Controllers
 
         [HttpGet]
         public IActionResult Logout()
-        {
+        {  
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }

@@ -17,7 +17,7 @@ namespace MvcHRMS.Repository
         public async Task<LeaveRequest> ApplyLeaveAsync(LeaveRequest leaveRequest)
         {
             _context.LeaveRequests.Add(leaveRequest);
-            await _context.SaveChangesAsync();
+            _context.SaveChangesAsync();
             return leaveRequest;
         }
 

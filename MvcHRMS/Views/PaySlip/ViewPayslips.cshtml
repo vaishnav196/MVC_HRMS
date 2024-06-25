@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<MvcHRMS.Models.PaySlip>
+<div class="container">
+    <h2 class="text-center">Pay Slips</h2>
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr class="table-dark">
+                <th>Employee ID</th>
+                <th>Employee Name</th>
+                <th>Month</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var payslip in Model)
+            {
+                <tr>
+                    <td>@payslip.EmpNo</td>
+                    <td>@payslip.Employee.Name</td>
+                    <td>@payslip.Month</td>
+                    <td>
+                        <a href="@Url.Action("Download", "PaySlip", new { id = payslip.Id })" class="btn btn-primary">Download</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
