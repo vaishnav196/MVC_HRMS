@@ -133,11 +133,11 @@ namespace MvcHRMS.Services
             // Create and configure the SmtpClient object with hardcoded SMTP settings
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com"); // Replace with your SMTP server
             smtpClient.Port = 587; // Replace with your SMTP port
-            smtpClient.Credentials = new System.Net.NetworkCredential("vaish00721@gmail.com", "kzuvycbbvbrdempp"); // Replace with your email and password
+            smtpClient.Credentials = new System.Net.NetworkCredential("", ""); // Replace with your email and password
             smtpClient.EnableSsl = true;
 
             // Set the sender's email address
-            mail.From = new MailAddress("vaish00721@gmail.com"); // Replace with your sender email address
+            mail.From = new MailAddress(""); // Replace with your sender email address
 
             // Add the recipient's email address
             mail.To.Add(employee.Email);
